@@ -1,19 +1,14 @@
 'use strict';
 
+var apartmentType = ['palace', 'flat', 'house', 'bungalo'];
+
 var moch = {
   'author': {
-    'avatar': ['img/avatars/user01.png',
-      'img/avatars/user02.png',
-      'img/avatars/user03.png',
-      'img/avatars/user04.png',
-      'img/avatars/user05.png',
-      'img/avatars/user06.png',
-      'img/avatars/user07.png',
-      'img/avatars/user08.png']
+    'avatar': []
   },
 
   'offer': {
-    'type': ['palace', 'flat', 'house', 'bungalo']
+    'type': []
   },
   'location': {
     'x': ['200px', '200px', '50px'],
@@ -21,26 +16,21 @@ var moch = {
   }
 };
 
-var userInfo = [
-  {
-    picture: moch.author.avatar[0],
-    apartmentType: moch.offer.type[0],
-    left: moch.location.x[0],
-    top: moch.location.y[0]
-  },
-  {
-    picture: moch.author.avatar[1],
-    apartmentType: moch.offer.type[1],
-    left: moch.location.x[1],
-    top: moch.location.y[1]
-  },
-  {
-    picture: moch.author.avatar[2],
-    apartmentType: moch.offer.type[2],
-    left: moch.location.x[2],
-    top: moch.location.y[2]
-  }
-];
+var userInfo = [];
+
+for (var i = 0; i < 8; i++) {
+  moch.author.avatar[i] = 'img/avatars/user0' + (i + 1) + '.png';
+  moch.offer.type[i] = apartmentType[Math.floor(Math.random() * 4)];
+  moch.location.x[i] = '' + Math.floor(Math.random() * 1000) + 'px';
+  moch.location.y[i] = '' + Math.floor((Math.random() * (630 - 130)) + 130) + 'px';
+  userInfo.push(
+      {
+        picture: moch.author.avatar[i],
+        apartmentType: moch.offer.type[i],
+        left: moch.location.x[i],
+        top: moch.location.y[i]
+      });
+}
 
 var map = document.querySelector('.map');
 var pin = document.querySelector('#pin').content
@@ -59,8 +49,8 @@ var generateMapPins = function (data) {
 
 var generatedData = document.createDocumentFragment();
 
-for (var i = 0; i < userInfo.length; i++) {
-  generatedData.appendChild(generateMapPins(userInfo[i]));
+for (var k = 0; k < userInfo.length; k++) {
+  generatedData.appendChild(generateMapPins(userInfo[k]));
 }
 
 map.appendChild(generatedData);
