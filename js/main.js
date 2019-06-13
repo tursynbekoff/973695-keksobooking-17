@@ -11,8 +11,8 @@ var moch = {
     'type': []
   },
   'location': {
-    'x': ['200px', '200px', '50px'],
-    'y': ['130px', '400px', '200px']
+    'x': [],
+    'y': []
   }
 };
 
@@ -21,7 +21,7 @@ var userInfo = [];
 for (var i = 0; i < 8; i++) {
   moch.author.avatar[i] = 'img/avatars/user0' + (i + 1) + '.png';
   moch.offer.type[i] = apartmentType[Math.floor(Math.random() * 4)];
-  moch.location.x[i] = '' + Math.floor(Math.random() * 1000) + 'px';
+  moch.location.x[i] = '' + Math.floor((Math.random() * (97 - 3)) + 3) + '%';
   moch.location.y[i] = '' + Math.floor((Math.random() * (630 - 130)) + 130) + 'px';
   userInfo.push(
       {
