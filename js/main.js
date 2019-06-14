@@ -21,7 +21,6 @@ var map = document.querySelector('.map');
 var pin = document.querySelector('#pin').content
     .querySelector('.map__pin');
 var mapWidth = map.clientWidth;
-console.log(mapWidth);
 
 for (var i = 0; i < 8; i++) {
   moch.author.avatar[i] = 'img/avatars/user0' + (i + 1) + '.png';
