@@ -17,11 +17,16 @@ var moch = {
 };
 
 var userInfo = [];
+var map = document.querySelector('.map');
+var pin = document.querySelector('#pin').content
+    .querySelector('.map__pin');
+var mapWidth = map.clientWidth;
+console.log(mapWidth);
 
 for (var i = 0; i < 8; i++) {
   moch.author.avatar[i] = 'img/avatars/user0' + (i + 1) + '.png';
   moch.offer.type[i] = apartmentType[Math.floor(Math.random() * 4)];
-  moch.location.x[i] = '' + Math.floor((Math.random() * (97 - 3)) + 3) + '%';
+  moch.location.x[i] = '' + Math.floor((Math.random() * (mapWidth - 60)) + 30) + 'px'; // max width mapWidth -30px and min width is 30px
   moch.location.y[i] = '' + Math.floor((Math.random() * (630 - 130)) + 130) + 'px';
   userInfo.push(
       {
@@ -32,9 +37,6 @@ for (var i = 0; i < 8; i++) {
       });
 }
 
-var map = document.querySelector('.map');
-var pin = document.querySelector('#pin').content
-    .querySelector('.map__pin');
 
 var generateMapPins = function (data) {
   var mapPin = pin.cloneNode(true);
