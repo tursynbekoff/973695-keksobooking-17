@@ -103,7 +103,7 @@ var settingTimeInInput = function (selectOne, selectTwo) {
 timeCheckIn.addEventListener('click', function () {
   settingTimeInInput(timeCheckIn, timeCheckOut);
 });
-timeCheckOut.addEventListener('click',
+timeCheckOut.addEventListener('click', function () {
   settingTimeInInput(timeCheckOut, timeCheckIn);
 });
 
