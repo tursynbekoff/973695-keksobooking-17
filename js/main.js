@@ -70,41 +70,35 @@ var generateMapPins = function (data) {
 var address = document.querySelector('#address');
 address.defaultValue = '570,375';
 
-var minPriceOnClick = function(price) {
+var minPriceOnClick = function (price) {
   var priceInput = document.querySelector('#price');
   priceInput.placeholder = price;
 };
 
 var apartmentTypeSelect = document.querySelector('#type');
 
-apartmentTypeSelect.addEventListener('click', function(evt) {
+apartmentTypeSelect.addEventListener('click', function (evt) {
   evt.preventDefault();
-  var apartmentTypeOption = apartmentTypeSelect.options;
   var apartmentTypeSelectedIndex = apartmentTypeSelect.selectedIndex;
 
   if (apartmentTypeSelectedIndex === 0) {
     minPriceOnClick(0);
-  }
-  else if (apartmentTypeSelectedIndex === 1) {
+  } else if (apartmentTypeSelectedIndex === 1) {
     minPriceOnClick(1000);
-  }
-  else if (apartmentTypeSelectedIndex === 2) {
+  } else if (apartmentTypeSelectedIndex === 2) {
     minPriceOnClick(5000);
-  }
-  else if (apartmentTypeSelectedIndex === 3) {
+  } else if (apartmentTypeSelectedIndex === 3) {
     minPriceOnClick(10000);
   }
-  console.log(apartmentTypeSelectedIndex);
 });
 
 var timeCheckIn = document.querySelector('#timein');
-var timeCheckOut = document.querySelector('#timeout')
+var timeCheckOut = document.querySelector('#timeout');
 
-timeCheckIn.addEventListener('click', function(evt) {
+timeCheckIn.addEventListener('click', function (evt) {
   evt.preventDefault();
-  var timeCheckInOption = timeCheckIn.options;
-  var timeCheckInIndex = timeCheckInOption.selectedIndex;
-  (timeCheckOut.options).selectedIndex = timeCheckInIndex;
+  var timeCheckInIndex = timeCheckIn.selectedIndex;
+  timeCheckOut.selectedIndex = timeCheckInIndex;
 });
 
 var activateMapPins = function () {
@@ -116,9 +110,9 @@ var activateMapPins = function () {
   map.appendChild(generatedData);
 };
 
-var pinCoordinate = function(x, y) {
+var pinCoordinate = function (x, y) {
   address.defaultValue = '' + x + ',' + y + '';
-}
+};
 
 mapInitialPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -128,11 +122,11 @@ mapInitialPin.addEventListener('mousedown', function (evt) {
     y: evt.clientY
   };
 
-  var dragged = false;
+  // var dragged = false;
 
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
-    dragged = true;
+    // dragged = true;
 
     var shift = {
       x: startCoords.x - moveEvt.clientX,
@@ -145,8 +139,7 @@ mapInitialPin.addEventListener('mousedown', function (evt) {
     };
 
     if ((((mapInitialPin.offsetLeft - shift.x) <= (mapWidth - 30)) && ((mapInitialPin.offsetLeft - shift.x) >= 30)) &&
-    ((mapInitialPin.offsetTop - shift.y) >= 130 && (mapInitialPin.offsetTop - shift.y) <= 630))
-    {
+    ((mapInitialPin.offsetTop - shift.y) >= 130 && (mapInitialPin.offsetTop - shift.y) <= 630)) {
       mapInitialPin.style.top = (mapInitialPin.offsetTop - shift.y) + 'px';
       mapInitialPin.style.left = (mapInitialPin.offsetLeft - shift.x) + 'px';
       pinCoordinate((mapInitialPin.offsetLeft - shift.x), (mapInitialPin.offsetTop - shift.y));
