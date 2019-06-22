@@ -95,10 +95,16 @@ apartmentTypeSelect.addEventListener('click', function (evt) {
 var timeCheckIn = document.querySelector('#timein');
 var timeCheckOut = document.querySelector('#timeout');
 
-timeCheckIn.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  var timeCheckInIndex = timeCheckIn.selectedIndex;
-  timeCheckOut.selectedIndex = timeCheckInIndex;
+var settingTimeInInput = function (selectOne, selectTwo) {
+  var selectIndex = selectOne.selectedIndex;
+  selectTwo.selectedIndex = selectIndex;
+};
+
+timeCheckIn.addEventListener('click', function () {
+  settingTimeInInput(timeCheckIn, timeCheckOut);
+});
+timeCheckOut.addEventListener('click',
+  settingTimeInInput(timeCheckOut, timeCheckIn);
 });
 
 var activateMapPins = function () {
