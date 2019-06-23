@@ -144,7 +144,7 @@ mapInitialPin.addEventListener('mousedown', function (evt) {
       y: moveEvt.clientY
     };
 
-    if ((((mapInitialPin.offsetLeft - shift.x) <= (mapWidth - 30)) && ((mapInitialPin.offsetLeft - shift.x) >= 30)) &&
+    if ((((mapInitialPin.offsetLeft - shift.x) <= (mapWidth - 60)) && ((mapInitialPin.offsetLeft - shift.x) >= 0)) &&
     ((mapInitialPin.offsetTop - shift.y) >= 130 && (mapInitialPin.offsetTop - shift.y) <= 630)) {
       mapInitialPin.style.top = (mapInitialPin.offsetTop - shift.y) + 'px';
       mapInitialPin.style.left = (mapInitialPin.offsetLeft - shift.x) + 'px';
