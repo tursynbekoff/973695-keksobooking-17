@@ -75,33 +75,25 @@
   timeCheckOut.addEventListener('click', function () {
     settingTimeInInput(timeCheckOut, timeCheckIn);
   });
-})();
 
-(function () {
-  var map = document.querySelector('.map');
-  var mapWidth = map.clientWidth;
-  var pin = document.querySelector('#pin').content
-      .querySelector('.map__pin');
-  var mapInitialPin = document.querySelector('.map__pin--main');
-  var uploadPhotoField = document.querySelector('.ad-form-header');
-  uploadPhotoField.disabled = true;
-  // selecting all fieldsets
-  var inputUserInfoFields = document.querySelectorAll('.ad-form__element');
   // function that disables elements
-  var disableInput = function (input) {
+  window.disableInput = function (input) {
     for (var i = 0; i < input.length; i++) {
       input[i].disabled = true;
     }
   };
 
-  var activateInput = function (input) {
+  window.activateInput = function (input) {
     for (var i = 0; i < input.length; i++) {
       input[i].disabled = false;
     }
   };
-  // disabling all fieldsets
-  disableInput(inputUserInfoFields);
+})();
 
+(function () {
+  var map = document.querySelector('.map');
+  var pin = document.querySelector('#pin').content
+      .querySelector('.map__pin');
   var generateMapPins = function (data) {
     var mapPin = pin.cloneNode(true);
     var avatar = document.querySelector('#pin').content
@@ -113,8 +105,7 @@
     return mapPin;
   };
 
-  var address = document.querySelector('#address');
-  var activateMapPins = function () {
+  window.activateMapPins = function () {
     var generatedData = document.createDocumentFragment();
 
     for (var i = 0; i < window.userInfo.length; i++) {
@@ -122,7 +113,20 @@
     }
     map.appendChild(generatedData);
   };
+})();
 
+(function () {
+  var map = document.querySelector('.map');
+  var mapWidth = map.clientWidth;
+  var mapInitialPin = document.querySelector('.map__pin--main');
+  var uploadPhotoField = document.querySelector('.ad-form-header');
+  uploadPhotoField.disabled = true;
+  // selecting all fieldsets
+  var inputUserInfoFields = document.querySelectorAll('.ad-form__element');
+  // disabling all fieldsets
+  window.disableInput(inputUserInfoFields);
+
+  var address = document.querySelector('#address');
   var pinCoordinate = function (x, y) {
     address.defaultValue = '' + x + ',' + y + '';
   };
@@ -169,9 +173,9 @@
     document.addEventListener('mouseup', onMouseUp);
 
     var form = document.querySelector('.ad-form');
-    activateInput(inputUserInfoFields);
+    window.activateInput(inputUserInfoFields);
     form.classList.remove('ad-form--disabled');
-    activateMapPins();
     map.classList.remove('map--faded');
+    window.activateMapPins();
   });
 })();
