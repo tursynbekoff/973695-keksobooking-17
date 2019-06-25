@@ -1,39 +1,93 @@
 'use strict';
 (function () {
-  var apartmentType = ['palace', 'flat', 'house', 'bungalo'];
-  var map = document.querySelector('.map');
+  window.load = function (onSuccess, onError) {
+    var url = 'https://js.dump.academy/keksobooking/data';
+    var xhr = new XMLHttpRequest();
 
-  var moch = {
-    'author': {
-      'avatar': []
-    },
+    xhr.responseType = 'json';
 
-    'offer': {
-      'type': []
-    },
-    'location': {
-      'x': [],
-      'y': []
+    xhr.addEventListener('load', function () {
+      if (xhr.status === 200) {
+        onSuccess(xhr.response);
+        window.loadedData = xhr.response;
+      } else {
+        onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      }
+    });
+
+    xhr.addEventListener('error', function () {
+      onError('Произошла ошибка соединения');
+    });
+
+    xhr.addEventListener('timeout', function () {
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
+
+    xhr.timeout = 10000;
+
+    xhr.open('GET', url);
+    xhr.send();
+  };
+})();
+
+(function () {
+  var onError = function (message) {
+    // var node = document.createElement('div');
+    // node.textContent = message;
+    // document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  var onSuccess = function (data) {
+    window.userInfo = [];
+    for (var i = 0; i < data.length; i++) {
+      window.userInfo.push(
+          {
+            picture: data[i].author.avatar,
+            apartmentType: data[i].offer.type,
+            left: '' + data[i].location.x + 'px',
+            top: '' + data[i].location.y + 'px'
+          });
     }
   };
 
-  window.userInfo = [];
-  var mapWidth = map.clientWidth;
-
-  for (var i = 0; i < 8; i++) {
-    moch.author.avatar[i] = 'img/avatars/user0' + (i + 1) + '.png';
-    moch.offer.type[i] = apartmentType[Math.floor(Math.random() * 4)];
-    moch.location.x[i] = '' + Math.floor((Math.random() * (mapWidth - 60)) + 30) + 'px'; // max width mapWidth -30px and min width is 30px
-    moch.location.y[i] = '' + Math.floor((Math.random() * (630 - 130)) + 130) + 'px';
-    window.userInfo.push(
-        {
-          picture: moch.author.avatar[i],
-          apartmentType: moch.offer.type[i],
-          left: moch.location.x[i],
-          top: moch.location.y[i]
-        });
-  }
+  window.load(onSuccess, onError);
 })();
+
+// (function () {
+//   var apartmentType = ['palace', 'flat', 'house', 'bungalo'];
+//   var map = document.querySelector('.map');
+//
+//   var moch = {
+//     'author': {
+//       'avatar': []
+//     },
+//
+//     'offer': {
+//       'type': []
+//     },
+//     'location': {
+//       'x': [],
+//       'y': []
+//     }
+//   };
+//
+//   window.userInfo = [];
+//   var mapWidth = map.clientWidth;
+//
+//   for (var i = 0; i < 8; i++) {
+//     moch.author.avatar[i] = 'img/avatars/user0' + (i + 1) + '.png';
+//     moch.offer.type[i] = apartmentType[Math.floor(Math.random() * 4)];
+//     moch.location.x[i] = '' + Math.floor((Math.random() * (mapWidth - 60)) + 30) + 'px'; // max width mapWidth -30px and min width is 30px
+//     moch.location.y[i] = '' + Math.floor((Math.random() * (630 - 130)) + 130) + 'px';
+//     window.userInfo.push(
+//         {
+//           picture: moch.author.avatar[i],
+//           apartmentType: moch.offer.type[i],
+//           left: moch.location.x[i],
+//           top: moch.location.y[i]
+//         });
+//   }
+// })();
 
 (function () {
   var address = document.querySelector('#address');
@@ -107,8 +161,9 @@
 
   window.activateMapPins = function () {
     var generatedData = document.createDocumentFragment();
-
-    for (var i = 0; i < window.userInfo.length; i++) {
+    var objectArray = window.userInfo;
+    console.log(window.userInfo);
+    for (var i = 0; i < objectArray.length; i++) {
       generatedData.appendChild(generateMapPins(window.userInfo[i]));
     }
     map.appendChild(generatedData);

@@ -16,8 +16,8 @@
 
   window.activateMapPins = function () {
     var generatedData = document.createDocumentFragment();
-
-    for (var i = 0; i < window.userInfo.length; i++) {
+    var objectArray = window.userInfo;
+    for (var i = 0; i < objectArray.length; i++) {
       generatedData.appendChild(generateMapPins(window.userInfo[i]));
     }
     map.appendChild(generatedData);
