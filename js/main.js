@@ -32,9 +32,9 @@
 
 (function () {
   var onError = function (message) {
-    // var node = document.createElement('div');
-    // node.textContent = message;
-    // document.body.insertAdjacentElement('afterbegin', node);
+    var node = document.createElement('div');
+    node.textContent = message;
+    document.body.insertAdjacentElement('afterbegin', node);
   };
 
   var onSuccess = function (data) {
@@ -162,7 +162,6 @@
   window.activateMapPins = function () {
     var generatedData = document.createDocumentFragment();
     var objectArray = window.userInfo;
-    console.log(window.userInfo);
     for (var i = 0; i < objectArray.length; i++) {
       generatedData.appendChild(generateMapPins(window.userInfo[i]));
     }
