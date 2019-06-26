@@ -1,9 +1,12 @@
 'use strict';
 (function () {
   var onError = function (message) {
-    var node = document.createElement('div');
-    node.textContent = message;
-    document.body.insertAdjacentElement('afterbegin', node);
+    var map = document.querySelector('.map');
+    var errorPopup = document.querySelector('#error').content.querySelector('.error');
+    // var popup = errorPopup.cloneNode(true);
+    var errorText = document.querySelector('#error').content.querySelector('.error__message');
+    errorText.innerHTML = '' + message + '';
+    map.appendChild(errorPopup);
   };
 
   var onSuccess = function (data) {
