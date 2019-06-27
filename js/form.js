@@ -3,26 +3,23 @@
   var address = document.querySelector('#address');
   address.defaultValue = '570,375';
 
-  var minPriceOnClick = function (price) {
-    var priceInput = document.querySelector('#price');
-    priceInput.placeholder = price;
-  };
-
+  var priceInput = document.querySelector('#price');
   var apartmentTypeSelect = document.querySelector('#type');
 
-  apartmentTypeSelect.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    var apartmentTypeSelectedIndex = apartmentTypeSelect.selectedIndex;
+  var minPrice = {
+    bungalo: 0,
+    flat: 1000,
+    house: 5000,
+    palace: 10000,
+  };
 
-    if (apartmentTypeSelectedIndex === 0) {
-      minPriceOnClick(0);
-    } else if (apartmentTypeSelectedIndex === 1) {
-      minPriceOnClick(1000);
-    } else if (apartmentTypeSelectedIndex === 2) {
-      minPriceOnClick(5000);
-    } else if (apartmentTypeSelectedIndex === 3) {
-      minPriceOnClick(10000);
-    }
+  var minPriceOnChange = function (value) {
+    priceInput.placeholder = value;
+    priceInput.min = value;
+  };
+
+  apartmentTypeSelect.addEventListener('change', function () {
+    minPriceOnChange(minPrice[apartmentTypeSelect.value]);
   });
 
   var timeCheckIn = document.querySelector('#timein');
