@@ -12,8 +12,10 @@
 
   var address = document.querySelector('#address');
   var pinCoordinate = function (x, y) {
-    address.defaultValue = '' + x + ',' + y + '';
+    address.defaultValue = x + ',' + y;
   };
+
+  var housingType = document.querySelector('#housing-type');
 
   mapInitialPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -60,6 +62,7 @@
     window.activateInput(inputUserInfoFields);
     form.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
-    window.activateMapPins();
+    // window.activateMapPins();
+    window.updateMapPins(housingType.value);
   });
 })();

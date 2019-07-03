@@ -4,50 +4,35 @@
   var pin = document.querySelector('#pin').content
       .querySelector('.map__pin');
 
-  var generateMapPins = function (data) {
-    var mapPin = pin.cloneNode(true);
-    var avatar = document.querySelector('#pin').content
-        .querySelector('img');
-    mapPin.style.left = '' + data.location.x + 'px';
-    mapPin.style.top = '' + data.location.y + 'px';
-    avatar.src = data.author.avatar;
-    avatar.alt = data.offer.type;
-    return mapPin;
-  };
-
-  window.activateMapPins = function () {
-    var generatedData = document.createDocumentFragment();
-    var objectArray = window.userInfo.slice(0, 5);
-    objectArray.forEach(function (array) {
-      generatedData.appendChild(generateMapPins(array));
-    });
-    map.appendChild(generatedData);
-  };
-
-
   var updateNewPins = function (object, filter) {
+    var mapPin = pin.cloneNode(true);
     if (object.offer.type === filter) {
-      var mapPin = pin.cloneNode(true);
       var avatar = document.querySelector('#pin').content
           .querySelector('img');
-      mapPin.style.left = '' + object.location.x + 'px';
-      mapPin.style.top = '' + object.location.y + 'px';
+      mapPin.style.left = object.location.x + 'px';
+      mapPin.style.top = object.location.y + 'px';
       avatar.src = object.author.avatar;
       avatar.alt = object.offer.type;
-      return mapPin;
+    } else if (filter === undefined) {
+      avatar = document.querySelector('#pin').content
+          .querySelector('img');
+      mapPin.style.left = object.location.x + 'px';
+      mapPin.style.top = object.location.y + 'px';
+      avatar.src = object.author.avatar;
+      avatar.alt = object.offer.type;
     }
-    return 0;
+    return mapPin;
   };
-
 
   window.updateMapPins = function (houseType) {
     var generatedData = document.createDocumentFragment();
     var objectArray = window.userInfo;
     var count = 0;
     var sort = function (object) {
-      if (count <= 5) {
+      if (count <= 4) {
         if (houseType === 'any') {
-          window.activateMapPins();
+          generatedData.appendChild(updateNewPins(object));
+          count += 1;
         } else if (object.offer.type === houseType) {
           generatedData.appendChild(updateNewPins(object, houseType));
           count += 1;
@@ -55,7 +40,8 @@
       }
       map.appendChild(generatedData);
     };
-    objectArray.filter(sort);
+
+    objectArray.forEach(sort);
   };
 
   window.removeMapPins = function () {
