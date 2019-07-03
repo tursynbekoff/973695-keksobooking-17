@@ -6,6 +6,5 @@
     window.removeMapPins();
     window.filterHosing = housingType.value;
     window.updateMapPins(housingType.value);
-    console.log(housingType.value);
   });
 })();
