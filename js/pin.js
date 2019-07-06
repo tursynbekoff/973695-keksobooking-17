@@ -62,7 +62,9 @@
     window.activateInput(inputUserInfoFields);
     form.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
-    // window.activateMapPins();
+
     window.updateMapPins(housingType.value);
+    window.updateCard();
+    window.updateCard();
   });
 })();
