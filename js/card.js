@@ -63,7 +63,6 @@
 
     slicedMapPins.forEach(function (element) {
       element.forEach(function (element2d, index2d, array2d) {
-
         if (array2d[0] < 5) {
           placePinsOnMap(array2d[1]);
         }
