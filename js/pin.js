@@ -53,6 +53,10 @@
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
       address.focus();
+
+      window.monitorCloseButton();
+      window.monitorPopupDisplay();
+
     };
 
     document.addEventListener('mousemove', onMouseMove);
@@ -62,9 +66,7 @@
     window.activateInput(inputUserInfoFields);
     form.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
-
     window.updateMapPins(housingType.value);
-    window.updateCard();
-    window.updateCard();
+    window.updateMapPins(housingType.value);
   });
 })();

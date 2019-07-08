@@ -5,7 +5,9 @@
       .querySelector('.map__pin');
 
   var assignValuesFromObject = function (object) {
+    window.OBJECT = object;
     var mapPin = pin.cloneNode(true);
+    mapPin.remove();
     var avatar = document.querySelector('#pin').content
         .querySelector('img');
     mapPin.style.left = object.location.x + 'px';
@@ -43,6 +45,7 @@
   };
 
   window.updateMapPins = function (houseType) {
+    window.removeMapPins();
     var objectArray = window.userInfo;
 
     var sort = function (object) {
@@ -58,12 +61,11 @@
     };
 
     var sortedMapPins = objectArray.map(sort);
-
     var slicedMapPins = sortedMapPins.map(countActivePins);
 
     slicedMapPins.forEach(function (element) {
       element.forEach(function (element2d, index2d, array2d) {
-        if (array2d[0] < 5) {
+        if (array2d[0] <= 5) {
           placePinsOnMap(array2d[1]);
         }
       });

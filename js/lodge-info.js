@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+
   var apartmentTypes = {
     'flat': 'Квартира',
     'bungalo': 'Бунгало',
@@ -75,7 +76,6 @@
       var mapCardPopupFeatures = document.querySelectorAll('.popup__feature');
       var mapCardPopupPhotos = document.querySelectorAll('.popup__photo');
 
-
       for (var i = 0; i < mapCardPopupPhotos.length - object.offer.photos.length; i++) {
         mapCardPopupPhotos[i].parentNode.removeChild(mapCardPopupPhotos[i]);
       }
@@ -117,19 +117,20 @@
   var generatedData = document.createDocumentFragment();
 
   var cardDisplay = function (object) {
-    generatedData.appendChild(updateNewCards(object));
-    map.insertBefore(generatedData, container);
+    if (object !== undefined) {
+      generatedData.appendChild(updateNewCards(object));
+      map.insertBefore(generatedData, container);
+    }
   };
   var iteration = 0;
 
-  window.updateCard = function () {
+  window.updateCard = function (object) {
     window.removeCards();
-    var objectArray = window.userInfo[1];
-    cardDisplay(objectArray);
+    cardDisplay(object);
     if (iteration > 1) {
       flag = true;
     }
-    deleteExtraElements(objectArray);
+    deleteExtraElements(object);
     iteration++;
   };
 
