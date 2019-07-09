@@ -8,57 +8,53 @@
     'palace': 'Дворец'
   };
 
+  var cardTemplate = document.querySelector('#card');
+
   var apartmentFeatures = {
-    'wifi': document.querySelector('#card')
+    'wifi': cardTemplate
             .content.querySelector('.popup__feature--wifi'),
-    'dishwasher': document.querySelector('#card')
+    'dishwasher': cardTemplate
             .content.querySelector('.popup__feature--dishwasher'),
-    'parking': document.querySelector('#card')
+    'parking': cardTemplate
             .content.querySelector('.popup__feature--parking'),
-    'washer': document.querySelector('#card')
+    'washer': cardTemplate
             .content.querySelector('.popup__feature--washer'),
-    'elevator': document.querySelector('#card')
+    'elevator': cardTemplate
             .content.querySelector('.popup__feature--elevator'),
-    'conditioner': document.querySelector('#card')
+    'conditioner': cardTemplate
             .content.querySelector('.popup__feature--conditioner')
   };
 
-  var card = document.querySelector('#card')
+  var card = cardTemplate
           .content.querySelector('.map__card');
   var map = document.querySelector('.map');
 
   var flag = false;
 
-  var title = document.querySelector('#card').content
-        .querySelector('.popup__title');
-  var address = document.querySelector('#card').content
-        .querySelector('.popup__text--address');
-  var price = document.querySelector('#card').content
-        .querySelector('.popup__text--price');
-  var type = document.querySelector('#card').content
-        .querySelector('.popup__type');
-  var room = document.querySelector('#card').content
-        .querySelector('.popup__text--capacity');
-  var time = document.querySelector('#card').content
-        .querySelector('.popup__text--time');
-  var features = document.querySelector('#card').content
-        .querySelector('.popup__features');
-  var description = document.querySelector('#card').content
-        .querySelector('.popup__description');
-  var photos = document.querySelector('#card').content
-        .querySelector('.popup__photos');
-  var defaultFeatures = document.querySelector('#card').content
-        .querySelectorAll('.popup__feature');
-  var avatar = document.querySelector('#card').content
-        .querySelector('.popup__avatar');
-  var img = document.querySelector('#card').content
-        .querySelector('.popup__photo');
+  var title = cardTemplate
+        .content.querySelector('.popup__title');
+  var address = cardTemplate
+        .content.querySelector('.popup__text--address');
+  var price = cardTemplate
+        .content.querySelector('.popup__text--price');
+  var type = cardTemplate
+        .content.querySelector('.popup__type');
+  var room = cardTemplate
+        .content.querySelector('.popup__text--capacity');
+  var time = cardTemplate
+        .content.querySelector('.popup__text--time');
+  var features = cardTemplate
+        .content.querySelector('.popup__features');
+  var description = cardTemplate
+        .content.querySelector('.popup__description');
+  var photos = cardTemplate
+        .content.querySelector('.popup__photos');
+  var avatar = cardTemplate
+        .content.querySelector('.popup__avatar');
+  var img = cardTemplate
+        .content.querySelector('.popup__photo');
 
   var insertFeatures = function (data) {
-    for (var j = 0; j < defaultFeatures.length; j++) {
-      defaultFeatures[j].remove();
-    }
-
     var feature = document.importNode(apartmentFeatures[data], true);
     features.appendChild(feature);
   };
@@ -72,7 +68,7 @@
   };
 
   var deleteExtraElements = function (object) {
-    if (flag === true) {
+    if (flag) {
       var mapCardPopupFeatures = document.querySelectorAll('.popup__feature');
       var mapCardPopupPhotos = document.querySelectorAll('.popup__photo');
 
@@ -88,7 +84,6 @@
 
   var updateNewCards = function (object) {
     var mapCard = card.cloneNode(true);
-    mapCard.remove();
 
     title.innerHTML = object.offer.title;
     address.innerHTML = object.offer.address;

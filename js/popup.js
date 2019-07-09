@@ -22,7 +22,7 @@
         renderedMapPin[i].addEventListener('click', function (evnt) {
           evnt.preventDefault();
           var target = evnt.target;
-          var classOfTargetButton = target.parentNode.classList + '';
+          var classOfTargetButton = target.parentNode.classList.toString();
 
           if (!classOfTargetButton.includes('map__pin--main')) {
             var targetSrc = target.src + '';
