@@ -54,19 +54,19 @@
       document.removeEventListener('mouseup', onMouseUp);
       address.focus();
 
+      var form = document.querySelector('.ad-form');
+      window.activateInput(inputUserInfoFields);
+      form.classList.remove('ad-form--disabled');
+      map.classList.remove('map--faded');
+      window.updateMapPins(housingType.value);
+
       window.monitorCloseButton();
       window.monitorPopupDisplay();
-
     };
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
-    var form = document.querySelector('.ad-form');
-    window.activateInput(inputUserInfoFields);
-    form.classList.remove('ad-form--disabled');
-    map.classList.remove('map--faded');
-    window.updateMapPins(housingType.value);
-    window.updateMapPins(housingType.value);
   });
+
 })();

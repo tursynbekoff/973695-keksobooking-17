@@ -3,11 +3,9 @@
   var map = document.querySelector('.map').querySelector('.map__pins');
   var pin = document.querySelector('#pin').content
       .querySelector('.map__pin');
-
   var assignValuesFromObject = function (object) {
-    window.OBJECT = object;
     var mapPin = pin.cloneNode(true);
-    mapPin.remove();
+    // mapPin.remove();
     var avatar = document.querySelector('#pin').content
         .querySelector('img');
     mapPin.style.left = object.location.x + 'px';
@@ -47,7 +45,7 @@
   window.updateMapPins = function (houseType) {
     window.removeMapPins();
     var objectArray = window.userInfo;
-
+    Array.from(objectArray);
     var sort = function (object) {
       var sortedMapPin;
 
@@ -56,11 +54,13 @@
       } else if (object.offer.type === houseType) {
         sortedMapPin = filterPins(object, houseType);
       }
+      object = null;
       return (typeof (sortedMapPin) !== 'undefined'
         ? sortedMapPin : null);
     };
 
     var sortedMapPins = objectArray.map(sort);
+    sortedMapPins = objectArray.map(sort);
     var slicedMapPins = sortedMapPins.map(countActivePins);
 
     slicedMapPins.forEach(function (element) {

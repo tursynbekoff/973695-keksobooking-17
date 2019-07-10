@@ -49,4 +49,17 @@
       input[i].disabled = false;
     }
   };
+
+  var roomNumber = document.querySelector('#room_number');
+  var roomCapacity = document.querySelector('#capacity');
+  var submit = document.querySelector('.ad-form__submit');
+
+  submit.addEventListener('click', function () {
+    if (roomNumber.selectedIndex !== roomCapacity.selectedIndex) {
+      roomCapacity.setCustomValidity('Количество гостей не соответствует количеству комнат');
+    } else if (roomNumber.selectedIndex === roomCapacity.selectedIndex) {
+      roomCapacity.setCustomValidity('');
+    }
+  });
+
 })();

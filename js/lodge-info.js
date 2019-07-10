@@ -122,7 +122,7 @@
   window.updateCard = function (object) {
     window.removeCards();
     cardDisplay(object);
-    if (iteration > 1) {
+    if (iteration > 0) {
       flag = true;
     }
     deleteExtraElements(object);
