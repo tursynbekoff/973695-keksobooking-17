@@ -1,11 +1,16 @@
 'use strict';
 (function () {
   var onError = function (message) {
-    var map = document.querySelector('.map');
-    var errorPopup = document.querySelector('#error').content.querySelector('.error');
+    var main = document.querySelector('main');
+    var errorPopupTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorText = document.querySelector('#error').content.querySelector('.error__message');
     errorText.innerHTML = message;
-    map.appendChild(errorPopup);
+    main.appendChild(errorPopupTemplate);
+
+    var errorPopup = document.querySelector('.error');
+    errorPopup.addEventListener('click', function () {
+      errorPopup.remove();
+    });
   };
 
   var onSuccess = function (data) {
