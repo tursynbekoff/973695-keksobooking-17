@@ -14,7 +14,8 @@
   };
 
   var onSuccess = function (data) {
-    window.userInfo = data;
+    window.userInfo = Array.from(data);
+    return window.userInfo;
   };
 
   window.load(onSuccess, onError);

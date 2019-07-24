@@ -41,17 +41,6 @@
   });
 
   // function that disables elements
-  window.disableInput = function (input) {
-    for (var i = 0; i < input.length; i++) {
-      input[i].disabled = true;
-    }
-  };
-
-  window.activateInput = function (input) {
-    for (var i = 0; i < input.length; i++) {
-      input[i].disabled = false;
-    }
-  };
 
   var roomNumber = document.querySelector('#room_number');
   var roomCapacity = document.querySelector('#capacity');

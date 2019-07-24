@@ -8,14 +8,25 @@
   // selecting all fieldsets
   var inputUserInfoFields = document.querySelectorAll('.ad-form__element');
   // disabling all fieldsets
+
+  window.disableInput = function (input) {
+    for (var i = 0; i < input.length; i++) {
+      input[i].disabled = true;
+    }
+  };
+
+  window.activateInput = function (input) {
+    for (var i = 0; i < input.length; i++) {
+      input[i].disabled = false;
+    }
+  };
+
   window.disableInput(inputUserInfoFields);
 
   var address = document.querySelector('#address');
   var pinCoordinate = function (x, y) {
     address.defaultValue = x + ',' + y;
   };
-
-  var housingType = document.querySelector('#housing-type');
 
   mapInitialPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -58,8 +69,9 @@
       window.activateInput(inputUserInfoFields);
       form.classList.remove('ad-form--disabled');
       map.classList.remove('map--faded');
-      window.updateMapPins(housingType.value);
 
+      window.updateMapPins();
+      //
       window.monitorCloseButton();
       window.monitorPopupDisplay();
     };
