@@ -10,12 +10,13 @@
   var assignValuesFromObject = function (object) {
     var mapPin = pin.cloneNode(true);
 
-    mapPin.style.left = object.location.x + 'px';
-    mapPin.style.top = object.location.y + 'px';
+    pin.style.left = object.location.x + 'px';
+    pin.style.top = object.location.y + 'px';
     avatar.src = object.author.avatar;
     avatar.alt = object.offer.type;
 
     return mapPin;
+    // map.appendChild(pin);
   };
 
   var featureWifi = document.querySelector('#filter-wifi');
@@ -32,6 +33,8 @@
     } else if (filter === undefined) {
       mapPin = assignValuesFromObject(object);
     }
+
+    // map.appendChild(pin);
 
     // не знаю как это приминить
     // var featureWifi = document.querySelector('#filter-wifi');
