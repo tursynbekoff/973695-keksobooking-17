@@ -29,14 +29,6 @@
 
   };
 
-  var count = 0;
-  var countActivePins = function (pins) {
-    if (pins !== null) {
-      count++;
-    }
-    return [count, pins];
-  };
-
   window.updateMapPins = function () {
     window.removeMapPins();
 
@@ -49,12 +41,7 @@
       return assignValuesFromObject(currentVal);
     });
 
-    console.log(pinsOnMap);
-
     pinsOnMap.forEach(placePinsOnMap);
-    // sortedMapPins.forEach(function (index) {
-    //   placePinsOnMap(filterPins(index));
-    // });
 
   };
 
