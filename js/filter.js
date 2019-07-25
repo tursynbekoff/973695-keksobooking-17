@@ -8,11 +8,7 @@
 
   var housingGuests = document.querySelector('#housing-guests');
 
-  var features = document.querySelector('#housing-features');
-
-
   window.sort = function (object) {
-
     housingType = document.querySelector('#housing-type');
     var housingTypeValue = housingType.value;
 
@@ -32,156 +28,89 @@
     var featureElevator = document.querySelector('#filter-elevator');
     var featureConditioner = document.querySelector('#filter-conditioner');
 
-    // if (featureWifi.checked) {
-    //   if (object.offer.features.includes(featureWifi.value)) {
-    //     return true;
-    //   }
-    // }
+    var filterByHousingType = function (input) {
 
-
-    var comparePrice = function (data) {
-      if (housingPriceValue === 'middle' &&
-          data.offer.price >= 10000 &&
-          data.offer.price <= 50000) {
-        return true;
-      } else if (housingPriceValue === 'low' &&
-          data.offer.price < 10000) {
-        return true;
-      } else if (housingPriceValue === 'high' &&
-          data.offer.price > 50000) {
-        return true;
+      if (housingTypeValue !== 'any'
+          && housingTypeValue !== input.offer.type) {
+        return false;
       }
-      return false;
+
+      if (housingPriceValue === 'high' &&
+            input.offer.price < 50000) {
+        return false;
+      } else if (housingPriceValue === 'middle' &&
+            (input.offer.price < 10000 ||
+            input.offer.price > 50000)) {
+        return false;
+      } else if (housingPriceValue === 'low' &&
+            input.offer.price > 10000) {
+        return false;
+      }
+
+      if (housingRoomsValue !== 'any' &&
+          housingRoomsValue !== object.offer.rooms.toString()) {
+        return false;
+      }
+
+      if (housingGuestsValue !== 'any' &&
+          housingGuestsValue !== object.offer.guests.toString()) {
+        return false;
+      }
+
+      if (featureWifi.checked) {
+        if (object.offer.features.includes(featureWifi.value) === false) {
+          return false;
+        }
+      }
+
+      if (featureDishwasher.checked) {
+        if (object.offer.features.includes(featureDishwasher.value) === false) {
+          return false;
+        }
+      }
+
+      if (featureParking.checked) {
+        if (object.offer.features.includes(featureParking.value) === false) {
+          return false;
+        }
+      }
+
+      if (featureWasher.checked) {
+        if (object.offer.features.includes(featureWasher.value) === false) {
+          return false;
+        }
+      }
+
+      if (featureElevator.checked) {
+        if (object.offer.features.includes(featureElevator.value) === false) {
+          return false;
+        }
+      }
+
+      if (featureConditioner.checked) {
+        if (object.offer.features.includes(featureConditioner.value) === false) {
+          return false;
+        }
+      }
+
+      return true;
     };
 
-    if (housingTypeValue === 'any'
-        && housingPriceValue === 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === 'any') {
-      return true;
-    } else if (object.offer.type === housingTypeValue
-        && housingPriceValue === 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === 'any') {
-      return true;
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === 'any') {
-      comparePrice(object);
-    } else if (object.offer.type === housingTypeValue
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === 'any') {
-      comparePrice(object);
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue === 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === 'any') {
-      return true;
-    } else if (object.offer.type === housingTypeValue
-        && housingPriceValue === 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === 'any') {
-      return true;
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === 'any') {
-      comparePrice(object);
-    } else if (object.offer.type === housingTypeValue
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === 'any') {
-      comparePrice(object);
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue === 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === object.offer.guests.toString()) {
-      return true;
-    } else if (housingTypeValue === object.offer.type
-        && housingPriceValue === 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === object.offer.guests.toString()) {
-      return true;
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === object.offer.guests.toString()) {
-      comparePrice(object);
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue === 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === object.offer.guests.toString()) {
-      return true;
-    } else if (housingTypeValue === object.offer.type
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === 'any'
-        && housingGuestsValue === object.offer.guests.toString()) {
-      comparePrice(object);
-    } else if (housingTypeValue === object.offer.type
-        && housingPriceValue === 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === object.offer.guests.toString()) {
-      return true;
-    } else if (housingTypeValue === 'any'
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === object.offer.guests.toString()) {
-      comparePrice(object);
-    } else if (housingTypeValue === object.offer.type
-        && housingPriceValue !== 'any'
-        && housingRoomsValue === object.offer.rooms.toString()
-        && housingGuestsValue === object.offer.guests.toString()) {
-      comparePrice(object);
-    }
+    var filteredByType = filterByHousingType(object);
 
-    return false;
+    return filteredByType;
   };
 
-  housingType.addEventListener('change', function () {
-    window.filterHousing = housingType.value;
-    window.updateMapPins();
-    window.updateMapPins();
-    // window.updateMapPins(housingType.value);
-
-    window.monitorCloseButton();
-    window.monitorPopupDisplay();
-  });
-
-  housingPrice.addEventListener('change', function () {
-    // window.housingPrice = housingPrice.value;
-    window.updateMapPins();
-    window.updateMapPins();
-    window.monitorCloseButton();
-    window.monitorPopupDisplay();
-    // window.updateMapPins(housingPrice.value);
-  });
-
-  housingRooms.addEventListener('change', function () {
-    // window.housingPrice = housingPrice.value;
-    window.updateMapPins();
-    window.updateMapPins();
-    window.monitorCloseButton();
-    window.monitorPopupDisplay();
-    // window.updateMapPins(housingPrice.value);
-  });
-
-  housingGuests.addEventListener('change', function () {
-    // window.housingPrice = housingPrice.value;
-    window.updateMapPins();
-    window.updateMapPins();
-    window.monitorCloseButton();
-    window.monitorPopupDisplay();
-    // window.updateMapPins(housingPrice.value);
-  });
-
-  features.addEventListener('click', function () {
-    // window.housingPrice = housingPrice.value;
-    window.updateMapPins();
-    window.updateMapPins();
-    window.monitorCloseButton();
-    window.monitorPopupDisplay();
-    // window.updateMapPins(housingPrice.value);
+  var filterForm = document.querySelector('.map__filters');
+  var lastTimeout;
+  filterForm.addEventListener('click', function () {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
+      window.updateMapPins();
+      window.monitorCloseButton();
+      window.monitorPopupDisplay();
+    }, 500);
   });
 })();

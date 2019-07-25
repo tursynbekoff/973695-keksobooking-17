@@ -8,12 +8,14 @@
       .querySelector('img');
 
   var assignValuesFromObject = function (object) {
-    var mapPin = pin.cloneNode(true);
+    // var mapPin = pin.cloneNode(true);
 
     pin.style.left = object.location.x + 'px';
     pin.style.top = object.location.y + 'px';
     avatar.src = object.author.avatar;
     avatar.alt = object.offer.type;
+
+    var mapPin = pin.cloneNode(true);
 
     return mapPin;
   };
@@ -35,14 +37,14 @@
     var objectArray = window.userInfo;
 
     var sortedMapPins = objectArray.filter(window.sort);
-    sortedMapPins = objectArray.filter(window.sort);
 
-    var pinsOnMap = sortedMapPins.map(function (currentVal) {
+    var catMapPins = sortedMapPins.slice(0, 5);
+
+    var pinsOnMap = catMapPins.map(function (currentVal) {
       return assignValuesFromObject(currentVal);
     });
 
     pinsOnMap.forEach(placePinsOnMap);
-
   };
 
   window.removeMapPins = function () {
