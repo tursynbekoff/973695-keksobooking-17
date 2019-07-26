@@ -58,37 +58,37 @@
       }
 
       if (featureWifi.checked) {
-        if (object.offer.features.includes(featureWifi.value) === false) {
+        if (!object.offer.features.includes(featureWifi.value)) {
           return false;
         }
       }
 
       if (featureDishwasher.checked) {
-        if (object.offer.features.includes(featureDishwasher.value) === false) {
+        if (!object.offer.features.includes(featureDishwasher.value)) {
           return false;
         }
       }
 
       if (featureParking.checked) {
-        if (object.offer.features.includes(featureParking.value) === false) {
+        if (!object.offer.features.includes(featureParking.value)) {
           return false;
         }
       }
 
       if (featureWasher.checked) {
-        if (object.offer.features.includes(featureWasher.value) === false) {
+        if (!object.offer.features.includes(featureWasher.value)) {
           return false;
         }
       }
 
       if (featureElevator.checked) {
-        if (object.offer.features.includes(featureElevator.value) === false) {
+        if (!object.offer.features.includes(featureElevator.value)) {
           return false;
         }
       }
 
       if (featureConditioner.checked) {
-        if (object.offer.features.includes(featureConditioner.value) === false) {
+        if (!object.offer.features.includes(featureConditioner.value)) {
           return false;
         }
       }
