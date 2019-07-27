@@ -71,8 +71,6 @@
       map.classList.remove('map--faded');
 
       window.updateMapPins();
-      // window.updateMapPins();
-      //
       window.monitorCloseButton();
       window.monitorPopupDisplay();
     };

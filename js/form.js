@@ -62,6 +62,48 @@
       });
     }
   };
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+  // var adFormAvatar = document.querySelector('.ad-form__field');
+
+  var images = document.querySelector('#images');
+  var photosPreview = document.querySelector('.ad-form__photo');
+  // var displayImage = document.createElement('img');
+
+
+  images.addEventListener('change', function (evt) {
+    var files = evt.target.files;
+
+    if (files.length >= 12) {
+      photosPreview.setCustomValidity('Привышен лимит количество фото. Не больше 12');
+    } else {
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var fileName = file.name.toLowerCase();
+
+        var matches = FILE_TYPES.some(function (it) {
+          return fileName.endsWith(it);
+        });
+
+        if (matches) {
+          var reader = new FileReader();
+
+          reader.addEventListener('load', function (e) {
+            var picFile = e.target;
+            var displayImage = document.createElement('img');
+            displayImage.setAttribute('src', picFile.result);
+            displayImage.setAttribute('width', 70);
+            displayImage.setAttribute('height', 70);
+            photosPreview.appendChild(displayImage);
+          });
+
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+
+  });
+
 
   submit.addEventListener('click', function (evt) {
     var minPriceCost = minPrice[apartmentTypeSelect.value];
