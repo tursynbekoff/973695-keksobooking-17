@@ -68,8 +68,6 @@
 
   var images = document.querySelector('#images');
   var photosPreview = document.querySelector('.ad-form__photo');
-  // var displayImage = document.createElement('img');
-
 
   images.addEventListener('change', function (evt) {
     var files = evt.target.files;
