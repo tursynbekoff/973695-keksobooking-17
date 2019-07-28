@@ -92,31 +92,27 @@
   images.addEventListener('change', function (evt) {
     var files = evt.target.files;
 
-    if (files.length >= 12) {
-      photosPreview.setCustomValidity('Привышен лимит количество фото. Не больше 12');
-    } else {
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        var fileName = file.name.toLowerCase();
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var fileName = file.name.toLowerCase();
 
-        var matches = FILE_TYPES.some(function (it) {
-          return fileName.endsWith(it);
+      var matches = FILE_TYPES.some(function (it) {
+        return fileName.endsWith(it);
+      });
+
+      if (matches) {
+        var reader = new FileReader();
+
+        reader.addEventListener('load', function (e) {
+          var picFile = e.target;
+          var displayImage = document.createElement('img');
+          displayImage.setAttribute('src', picFile.result);
+          displayImage.setAttribute('width', 70);
+          displayImage.setAttribute('height', 70);
+          photosPreview.appendChild(displayImage);
         });
 
-        if (matches) {
-          var reader = new FileReader();
-
-          reader.addEventListener('load', function (e) {
-            var picFile = e.target;
-            var displayImage = document.createElement('img');
-            displayImage.setAttribute('src', picFile.result);
-            displayImage.setAttribute('width', 70);
-            displayImage.setAttribute('height', 70);
-            photosPreview.appendChild(displayImage);
-          });
-
-          reader.readAsDataURL(file);
-        }
+        reader.readAsDataURL(file);
       }
     }
 
@@ -128,6 +124,16 @@
     var inputPrice = priceInput.value;
     minPriceOnChange(minPriceCost);
     inputPrice = Number(inputPrice);
+    var uploadedPhotos = photosPreview.querySelectorAll('img');
+
+    // if (uploadedPhotos.length >= 12) {
+    //   photosPreview.setCustomValidity('Привышен лимит количество фото. Не больше 12');
+    //
+    //   uploadedPhotos.forEach(function (it) {
+    //     it.parentNode.removeChild(it);
+    //   });
+    //
+    // }
 
     if (roomNumber.selectedIndex !== roomCapacity.selectedIndex) {
       roomCapacity.setCustomValidity('Количество гостей не соответствует количеству комнат');
@@ -151,8 +157,6 @@
         mapPins.appendChild(mapInitialPin);
 
         avatarPreview.src = 'img/muffin-grey.svg';
-
-        var uploadedPhotos = photosPreview.querySelectorAll('img');
 
         uploadedPhotos.forEach(function (it) {
           it.parentNode.removeChild(it);
