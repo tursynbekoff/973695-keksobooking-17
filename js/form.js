@@ -9,6 +9,8 @@
   var apartmentTypeSelect = document.querySelector('#type');
   var titleValue = document.querySelector('#title');
 
+  var reset = document.querySelector('.ad-form__reset');
+
   var minPrice = {
     bungalo: 0,
     flat: 1000,
@@ -29,8 +31,7 @@
   var timeCheckOut = document.querySelector('#timeout');
 
   var settingTimeInInput = function (selectOne, selectTwo) {
-    var selectIndex = selectOne.selectedIndex;
-    selectTwo.selectedIndex = selectIndex;
+    selectTwo.selectedIndex = selectOne.selectedIndex;
   };
 
   timeCheckIn.addEventListener('click', function () {
@@ -115,13 +116,39 @@
     }
   });
 
+  var form = document.querySelector('.ad-form');
+  var filterForm = document.querySelector('.map__filters');
+
+  var resetForm = function () {
+    window.removeMapPins();
+
+    form.classList.add('ad-form--disabled');
+    map.classList.add('map--faded');
+
+    var uploadedPhotos = photosPreview.querySelectorAll('img');
+    form.reset();
+    filterForm.reset();
+    address.defaultValue = '570,375';
+    mapInitialPin.style.left = '570px';
+    mapInitialPin.style.top = '375px';
+    mapPins.appendChild(mapInitialPin);
+
+    avatarPreview.src = 'img/muffin-grey.svg';
+
+    uploadedPhotos.forEach(function (it) {
+      it.parentNode.removeChild(it);
+    });
+  };
+
+  reset.addEventListener('click', function () {
+    resetForm();
+  });
 
   submit.addEventListener('click', function (evt) {
     var minPriceCost = minPrice[apartmentTypeSelect.value];
     var inputPrice = priceInput.value;
     minPriceOnChange(minPriceCost);
     inputPrice = Number(inputPrice);
-    var uploadedPhotos = photosPreview.querySelectorAll('img');
 
     if (roomNumber.selectedIndex !== roomCapacity.selectedIndex) {
       roomCapacity.setCustomValidity('Количество гостей не соответствует количеству комнат');
@@ -130,25 +157,8 @@
         && inputPrice >= minPriceCost) {
       evt.preventDefault();
 
-      var form = document.querySelector('.ad-form');
-      var filterForm = document.querySelector('.map__filters');
-
       window.upload(new FormData(form), function () {
-        form.reset();
-        filterForm.reset();
-        form.classList.add('ad-form--disabled');
-        map.classList.add('map--faded');
-        window.removeMapPins();
-        address.defaultValue = '570,375';
-        mapInitialPin.style.left = '570px';
-        mapInitialPin.style.top = '375px';
-        mapPins.appendChild(mapInitialPin);
-
-        avatarPreview.src = 'img/muffin-grey.svg';
-
-        uploadedPhotos.forEach(function (it) {
-          it.parentNode.removeChild(it);
-        });
+        resetForm();
 
         map.appendChild(successTemplate);
         removeSuccessPopup();

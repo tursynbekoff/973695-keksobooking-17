@@ -27,6 +27,8 @@
     var featureWasher = document.querySelector('#filter-washer');
     var featureElevator = document.querySelector('#filter-elevator');
     var featureConditioner = document.querySelector('#filter-conditioner');
+    var MAX_PRICE = 50000;
+    var MIN_PRICE = 10000;
 
     var filterByHousingType = function (input) {
 
@@ -36,14 +38,14 @@
       }
 
       if (housingPriceValue === 'high' &&
-            input.offer.price < 50000) {
+            input.offer.price < MAX_PRICE) {
         return false;
       } else if (housingPriceValue === 'middle' &&
-            (input.offer.price < 10000 ||
-            input.offer.price > 50000)) {
+            (input.offer.price < MIN_PRICE ||
+            input.offer.price > MAX_PRICE)) {
         return false;
       } else if (housingPriceValue === 'low' &&
-            input.offer.price > 10000) {
+            input.offer.price > MIN_PRICE) {
         return false;
       }
 
