@@ -40,8 +40,6 @@
     settingTimeInInput(timeCheckOut, timeCheckIn);
   });
 
-  // function that disables elements
-
   var roomNumber = document.querySelector('#room_number');
   var roomCapacity = document.querySelector('#capacity');
   var submit = document.querySelector('.ad-form__submit');
@@ -115,7 +113,6 @@
         reader.readAsDataURL(file);
       }
     }
-
   });
 
 
@@ -125,15 +122,6 @@
     minPriceOnChange(minPriceCost);
     inputPrice = Number(inputPrice);
     var uploadedPhotos = photosPreview.querySelectorAll('img');
-
-    // if (uploadedPhotos.length >= 12) {
-    //   photosPreview.setCustomValidity('Привышен лимит количество фото. Не больше 12');
-    //
-    //   uploadedPhotos.forEach(function (it) {
-    //     it.parentNode.removeChild(it);
-    //   });
-    //
-    // }
 
     if (roomNumber.selectedIndex !== roomCapacity.selectedIndex) {
       roomCapacity.setCustomValidity('Количество гостей не соответствует количеству комнат');
@@ -167,6 +155,4 @@
       });
     }
   });
-
-
 })();

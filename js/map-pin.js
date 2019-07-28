@@ -8,7 +8,6 @@
       .querySelector('img');
 
   var assignValuesFromObject = function (object) {
-    // var mapPin = pin.cloneNode(true);
 
     pin.style.left = object.location.x + 'px';
     pin.style.top = object.location.y + 'px';

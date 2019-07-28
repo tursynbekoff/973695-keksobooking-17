@@ -5,9 +5,8 @@
   var mapInitialPin = document.querySelector('.map__pin--main');
   var uploadPhotoField = document.querySelector('.ad-form-header');
   uploadPhotoField.disabled = true;
-  // selecting all fieldsets
+
   var inputUserInfoFields = document.querySelectorAll('.ad-form__element');
-  // disabling all fieldsets
 
   window.disableInput = function (input) {
     for (var i = 0; i < input.length; i++) {
@@ -55,7 +54,6 @@
         mapInitialPin.style.left = (mapInitialPin.offsetLeft - shift.x) + 'px';
         pinCoordinate((mapInitialPin.offsetLeft - shift.x), (mapInitialPin.offsetTop - shift.y));
       }
-
     };
 
     var onMouseUp = function (upEvt) {
@@ -78,7 +76,5 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-
   });
-
 })();
