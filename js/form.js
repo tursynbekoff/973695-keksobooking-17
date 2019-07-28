@@ -64,10 +64,30 @@
   };
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-  // var adFormAvatar = document.querySelector('.ad-form__field');
+  var adFormAvatar = document.querySelector('#avatar');
+  var avatarPreview = document.querySelector('.ad-form-header__preview img');
 
   var images = document.querySelector('#images');
   var photosPreview = document.querySelector('.ad-form__photo');
+
+  adFormAvatar.addEventListener('change', function () {
+    var file = adFormAvatar.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        avatarPreview.src = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
 
   images.addEventListener('change', function (evt) {
     var files = evt.target.files;
@@ -129,6 +149,14 @@
         mapInitialPin.style.left = '570px';
         mapInitialPin.style.top = '375px';
         mapPins.appendChild(mapInitialPin);
+
+        avatarPreview.src = 'img/muffin-grey.svg';
+
+        var uploadedPhotos = photosPreview.querySelectorAll('img');
+
+        uploadedPhotos.forEach(function (it) {
+          it.parentNode.removeChild(it);
+        });
 
         map.appendChild(successTemplate);
         removeSuccessPopup();
