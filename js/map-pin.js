@@ -8,15 +8,12 @@
       .querySelector('img');
 
   var assignValuesFromObject = function (object) {
-
     pin.style.left = object.location.x + 'px';
     pin.style.top = object.location.y + 'px';
     avatar.src = object.author.avatar;
     avatar.alt = object.offer.type;
 
-    var mapPin = pin.cloneNode(true);
-
-    return mapPin;
+    return pin.cloneNode(true);
   };
 
   var generatedData = document.createDocumentFragment();
