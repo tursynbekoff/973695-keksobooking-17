@@ -121,6 +121,7 @@
 
   var resetForm = function () {
     window.removeMapPins();
+    window.removeCards();
 
     form.classList.add('ad-form--disabled');
     map.classList.add('map--faded');
